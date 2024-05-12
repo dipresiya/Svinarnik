@@ -9,15 +9,17 @@ var should_draw_square = false
 func _ready():
 	$Timer.wait_time = 0.1
 	$Timer.start()
-	#draw_rect(Rect2(0, 0, GRID_SIZE * 50, GRID_SIZE * 30), Color.TEAL, false, 16)
+	draw_rect(Rect2(0, 0, GRID_SIZE * 50, GRID_SIZE * 30), Color.TEAL, false, 16)
 	pass
 	
 func _on_timer_timeout():
 	should_draw_square = true
 	
 func _draw():
+	
 	draw_rect(Rect2(0, 0, GRID_SIZE * 50, GRID_SIZE * 30), Color.TEAL, false, 16)
 	update_snake()
+	
 	
 func update_snake():
 	for segment in snake_segments:
@@ -32,13 +34,13 @@ func move_snake():
 	
 func _input(event):
 	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_D:
+		if event.keycode == KEY_D and snake_direction != Vector2.LEFT:
 			snake_direction = Vector2.RIGHT
-		if event.keycode == KEY_S:
+		if event.keycode == KEY_S and snake_direction != Vector2.UP:
 			snake_direction = Vector2.DOWN
-		if event.keycode == KEY_A:
+		if event.keycode == KEY_A and snake_direction != Vector2.RIGHT:
 			snake_direction = Vector2.LEFT
-		if event.keycode == KEY_W:
+		if event.keycode == KEY_W and snake_direction != Vector2.DOWN:
 			snake_direction = Vector2.UP
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
