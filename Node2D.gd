@@ -16,9 +16,9 @@ func _on_timer_timeout():
 	should_draw_square = true
 	
 func _draw():
-	
-	draw_rect(Rect2(0, 0, GRID_SIZE * 50, GRID_SIZE * 30), Color.TEAL, false, 16)
 	update_snake()
+	draw_rect(Rect2(0, 0, GRID_SIZE * 50, GRID_SIZE * 30), Color.TEAL, false, 16)
+	
 	
 	
 func update_snake():
