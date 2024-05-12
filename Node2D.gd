@@ -10,7 +10,7 @@ var food_position = Vector2()  # Добавлено: переменная для
 func _ready():
 	$Timer.wait_time = 0.1
 	$Timer.start()
-	draw_rect(Rect2(0, 0, GRID_SIZE * 50, GRID_SIZE * 30), Color.TEAL, false, 16)
+	#draw_rect(Rect2(0, 0, GRID_SIZE * 50, GRID_SIZE * 30), Color.TEAL, false, 16)
 	spawn_food()  # Добавлено: вызов функции для появления еды
 	pass
 	
@@ -22,7 +22,7 @@ func draw_food():
 	
 func _draw():
 	update_snake()
-	draw_rect(Rect2(0, 0, GRID_SIZE * 50, GRID_SIZE * 30), Color.TEAL, false, 16)
+	draw_rect(Rect2(GRID_SIZE/2, GRID_SIZE/2, GRID_SIZE * 50, GRID_SIZE * 30), Color.TEAL, false, GRID_SIZE)
 	draw_food()  # Добавлено: вызов функции для отрисовки еды
 	
 	
@@ -72,4 +72,4 @@ func _process(delta):
 	pass
 func spawn_food():
 	# Устанавливаем случайную позицию для еды
-	food_position = Vector2(randi() % 50, randi() % 30)
+	food_position = Vector2(randi() % 48 + 1, randi() % 28 + 1)
