@@ -23,7 +23,9 @@ func _ready():
 	
 func _on_timer_timeout():
 	should_draw_square = true
-	
+func _input(event):
+	handle_input(event)
+		
 func spawn_food():
 	var is_food_on_snake = true  # Флаг для проверки, находится ли еда на теле змеи
 	
@@ -42,6 +44,9 @@ func draw_food():
 	draw_rect(Rect2(food_position.x * grid_size, food_position.y * grid_size, grid_size, grid_size), Color.RED)	
 	
 func _draw():
+	draw_game()
+	
+func draw_game():
 	update_snake()
 	draw_rect(Rect2(grid_size/2, grid_size/2, grid_size * grid_width, grid_size * grid_height), Color.TEAL, false, grid_size)
 	draw_food()  # Добавлено: вызов функции для отрисовки еды
@@ -73,16 +78,21 @@ func move_snake():
 		# Удаляем хвост змейки
 		snake_segments.pop_back()
 	
-func _input(event):
+func handle_input(event):
 	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_D and snake_direction != Vector2.LEFT:
-			snake_direction = Vector2.RIGHT
-		if event.keycode == KEY_S and snake_direction != Vector2.UP:
-			snake_direction = Vector2.DOWN
-		if event.keycode == KEY_A and snake_direction != Vector2.RIGHT:
-			snake_direction = Vector2.LEFT
-		if event.keycode == KEY_W and snake_direction != Vector2.DOWN:
-			snake_direction = Vector2.UP
+		match event.keycode:
+			KEY_D:
+				if snake_direction != Vector2.LEFT:
+					snake_direction = Vector2.RIGHT
+			KEY_S:
+				if snake_direction != Vector2.UP:
+					snake_direction = Vector2.DOWN
+			KEY_A:
+				if snake_direction != Vector2.RIGHT:
+					snake_direction = Vector2.LEFT
+			KEY_W:
+				if snake_direction != Vector2.DOWN:
+					snake_direction = Vector2.UP
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
